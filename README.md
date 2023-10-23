@@ -7,10 +7,14 @@ CI worker for processing the RDF Stream Taxonomy (RDF-STaX).
 Use the provided Docker image. In the container you can invoke the commands:
 
 ```bash
-$ python tasks/package.py <input dir> <output dir> <version tag>
-$ python tasks/doc_gen.py <input file> <output dir>
-$ java -jar robot.jar <command>
+$ python /app/tasks/package.py <input dir> <output dir> <version tag>
+$ python /app/tasks/doc_gen.py <input file> <output dir>
+$ java -jar /app/robot.jar <command>
 ```
+
+## Contributing
+
+Please see **[the main repository of RDF-STaX](https://github.com/RDF-STaX/rdf-stax.github.io)** and its [issue tracker](https://github.com/RDF-STaX/rdf-stax.github.io/issues) for more information.
 
 ## License
 
