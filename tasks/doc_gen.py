@@ -41,6 +41,8 @@ def main():
     with open(Path(__file__).parent / 'res' / 'pylode.css', 'r') as f:
         css = f.read()
     html = re.sub(r'<style>.*</style>', f'<style>{css}</style>', html, flags=re.DOTALL)
+    img = f'<img src="https://rdf-stax.github.io/{version_tag}/assets/ontology.png" alt="Ontology diagram" >'
+    html = re.sub(r'<div.*?Pictures.*?</div>', img, html)
     # Save
     with open(output_file, 'w') as f:
         f.write(html)

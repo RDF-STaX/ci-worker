@@ -61,7 +61,10 @@ ul.hlist li {
 }
 
 section#overview img {
-    max-width: 1000px;
+    width: 100%;
+    margin: auto;
+    max-width: 550px;
+    display: block;
 }
 
 dd {
