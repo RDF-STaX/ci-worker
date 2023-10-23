@@ -33,10 +33,10 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -y --no-install-recommends temurin-17-jdk
 
+WORKDIR /app
+
 # Download robot.jar
 RUN wget https://github.com/ontodev/robot/releases/download/v1.9.5/robot.jar
-
-WORKDIR /app
 
 # Copy virtual env from python-deps stage
 COPY --from=python-deps /.venv /app/.venv
