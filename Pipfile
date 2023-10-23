@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 rdflib = "*"
+pylode = "2.13.2"
 
 [dev-packages]
 
