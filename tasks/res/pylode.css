@@ -1,14 +1,5 @@
 /* Replacement styles for PyLODE docs so that they look good in mkdocs pages */
 
-/*#pylode {*/
-/*    position: fixed;*/
-/*    top: 130px;*/
-/*    left: -60px;*/
-/*    font-size: small;*/
-/*    transform: rotate(-90deg);*/
-/*    color: grey;*/
-/*}*/
-
 #pylode a {
     font-size: 1.8em;
     font-weight: bold;
@@ -94,11 +85,6 @@ h5 {
 
 h6 {
     font: small-caps 100% sans-serif
-}
-
-
-body {
-    /*text-align: justify;*/
 }
 
 .figure {
