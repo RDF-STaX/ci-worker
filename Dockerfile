@@ -24,9 +24,19 @@ RUN PIPENV_VENV_IN_PROJECT=1 pipenv install --deploy
 
 FROM base AS runtime
 
-WORKDIR /app
+# Install Eclipse Temurin
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends wget apt-transport-https && \
+    mkdir -p /etc/apt/keyrings && \
+    wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | tee /etc/apt/keyrings/adoptium.asc && \
+    echo "deb [signed-by=/etc/apt/keyrings/adoptium.asc] https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | tee /etc/apt/sources.list.d/adoptium.list && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends temurin-17-jdk
+
 # Download robot.jar
 RUN wget https://github.com/ontodev/robot/releases/download/v1.9.5/robot.jar
+
+WORKDIR /app
 
 # Copy virtual env from python-deps stage
 COPY --from=python-deps /.venv /app/.venv
