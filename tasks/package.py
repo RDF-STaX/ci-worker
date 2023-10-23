@@ -1,10 +1,11 @@
+from datetime import datetime, timezone
 from pathlib import Path
 import re
 import os
 import subprocess
 import sys
 
-from rdflib import Graph, Namespace, Literal, OWL, RDF, RDFS, SKOS, URIRef
+from rdflib import Graph, Namespace, Literal, DCTERMS, OWL, RDF, RDFS, SKOS, XSD, URIRef
 
 STAX_PREFIX = 'https://w3id.org/stax/ontology#'
 STAX_MAIN = 'https://w3id.org/stax/ontology'
@@ -76,6 +77,8 @@ def main():
     print('Adding version...')
     g.add((URIRef(STAX_MAIN), OWL.versionInfo, Literal(version)))
     g.add((URIRef(STAX_MAIN), OWL.versionIRI, URIRef(f'{STAX_MAIN}/{version}')))
+    now_iso = datetime.now(timezone.utc).isoformat()[:19]
+    g.add((URIRef(STAX_MAIN), DCTERMS.issued, Literal(now_iso, datatype=XSD.dateTime)))
     g.namespace_manager.bind('stax_ont', None, replace=True)
 
     print('Serializing...')
