@@ -10,6 +10,7 @@ from rdflib import Graph, Namespace, Literal, DCTERMS, OWL, RDF, RDFS, SKOS, XSD
 STAX_PREFIX = 'https://w3id.org/stax/ontology#'
 STAX_MAIN = 'https://w3id.org/stax/ontology'
 STAX = Namespace(STAX_PREFIX)
+SCHEMA = Namespace('http://schema.org/')
 
 
 def main():
@@ -80,6 +81,7 @@ def main():
     now_iso = datetime.now(timezone.utc).isoformat()[:19]
     g.add((URIRef(STAX_MAIN), DCTERMS.issued, Literal(now_iso, datatype=XSD.dateTime)))
     g.namespace_manager.bind('stax_ont', None, replace=True)
+    g.namespace_manager.bind('schema', SCHEMA, replace=True)
 
     print('Serializing...')
     try:
