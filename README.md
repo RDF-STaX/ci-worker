@@ -14,7 +14,7 @@ $ java -jar /app/robot.jar <command>
 
 ## Contributing
 
-Please see **[the main repository of RDF-STaX](https://github.com/RDF-STaX/rdf-stax.github.io)** and its [issue tracker](https://github.com/RDF-STaX/rdf-stax.github.io/issues) for more information.
+Please see **[the main repository of RDF-STaX](https://github.com/RDF-STaX/rdf-stax.github.io)** and its [issue tracker](https://github.com/RDF-STaX/rdf-stax.github.io/issues) for more information. Please file any feature requests, bugs, or other issues there.
 
 ## License
 
