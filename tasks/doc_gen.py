@@ -26,6 +26,9 @@ def main():
     output_dir = Path(sys.argv[2])
     output_file = output_dir / 'docs.html'
     version_tag = sys.argv[3]
+    if re.match(r'^v\d+\.\d+\.', version_tag):
+        # strip "v" from the start of the version tag
+        version_tag = version_tag[1:]
 
     print('Generating documentation...')
     pylode.MakeDocco(
