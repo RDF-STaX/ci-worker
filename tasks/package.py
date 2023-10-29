@@ -65,6 +65,10 @@ def main():
     g.namespace_manager.bind('schema', SCHEMA, replace=True)
 
     print('Serializing the OWL 2 DL ontology...')
+    try:
+        os.mkdir(output_dir)
+    except FileExistsError:
+        pass
     serialize(g, output_dir, 'dl')
 
     print("Validating the OWL 2 DL ontology's profile...")
@@ -103,10 +107,6 @@ def main():
     print(f'Added {len(g) - original_size} triples about alignments')
 
     print('Serializing the merged ontology...')
-    try:
-        os.mkdir(output_dir)
-    except FileExistsError:
-        pass
     serialize(g, output_dir, 'stax')
 
 
