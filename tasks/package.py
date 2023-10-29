@@ -79,10 +79,6 @@ def main():
     g_inf = Graph()
     g_inf.parse(temp_dir / 'inferred.ttl', format='turtle')
 
-    g.parse(input_dir / 'authors.ttl', format='turtle')
-    print(f'Added {len(g) - original_size} triples about authors')
-    original_size = len(g)
-
     for s, p, o in g_inf:
         if (s, p, o) in g:
             continue
@@ -97,6 +93,15 @@ def main():
             g.add((s, p, o))
 
     print(f'Added {len(g) - original_size} inferred triples')
+    original_size = len(g)
+
+    g.parse(input_dir / 'authors.ttl', format='turtle')
+    print(f'Added {len(g) - original_size} triples about authors')
+    original_size = len(g)
+
+    g.parse(input_dir / 'alignments.ttl', format='turtle')
+    print(f'Added {len(g) - original_size} triples about alignments')
+
     print('Serializing the merged ontology...')
     try:
         os.mkdir(output_dir)
