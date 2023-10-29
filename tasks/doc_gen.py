@@ -10,7 +10,7 @@ FORMATS = [
     ('jsonld', 'JSON-LD'),
     ('rdf', 'RDF/XML'),
 ]
-BASE_LINK = 'https://w3id.org/stax/ontology'
+BASE_LINK = 'https://w3id.org/stax'
 
 
 def main():
@@ -41,7 +41,7 @@ def main():
     with open(Path(__file__).parent / 'res' / 'pylode.css', 'r') as f:
         css = f.read()
     html = re.sub(r'<style>.*</style>', f'<style>{css}</style>', html, flags=re.DOTALL)
-    img = f'<img src="https://rdf-stax.github.io/{version_tag}/assets/ontology.png" alt="Ontology diagram" >'
+    img = f'<img src="/{version_tag}/assets/ontology.png" alt="Ontology diagram" >'
     html = re.sub(r'<div.*?Pictures.*?</div>', img, html)
     # Save
     with open(output_file, 'w') as f:
@@ -52,7 +52,7 @@ def main():
         f.write('!!! info\n\n')
         f.write('    Download the ontology in RDF: ')
         for (ext, fmt) in FORMATS:
-            f.write(f'**[{fmt}]({BASE_LINK}/{version_tag}.{ext})**')
+            f.write(f'**[{fmt}]({BASE_LINK}/{version_tag}/ontology.{ext})**')
             if ext != 'rdf':
                 f.write(', ')
         f.write('.\n')

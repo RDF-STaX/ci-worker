@@ -77,7 +77,7 @@ def main():
 
     print('Adding version...')
     g.add((URIRef(STAX_MAIN), OWL.versionInfo, Literal(version)))
-    g.add((URIRef(STAX_MAIN), OWL.versionIRI, URIRef(f'{STAX_MAIN}/{version}')))
+    g.add((URIRef(STAX_MAIN), OWL.versionIRI, URIRef(STAX_MAIN.replace('ontology', version + '/ontology'))))
     now_iso = datetime.now(timezone.utc).isoformat()[:19]
     g.add((URIRef(STAX_MAIN), DCTERMS.issued, Literal(now_iso, datatype=XSD.dateTime)))
     g.namespace_manager.bind('stax_ont', None, replace=True)
