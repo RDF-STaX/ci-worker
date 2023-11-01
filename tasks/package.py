@@ -59,10 +59,8 @@ def main():
     g.add((URIRef(STAX_MAIN), OWL.versionIRI, URIRef(STAX_MAIN.replace('ontology', version + '/ontology'))))
     now_iso = datetime.now(timezone.utc).isoformat()[:19]
     g.add((URIRef(STAX_MAIN), DCTERMS.modified, Literal(now_iso, datatype=XSD.dateTime)))
-    g.add((URIRef(STAX_MAIN), DCTERMS.issued, Literal(now_iso, datatype=XSD.dateTime)))
     # Add the type of the dcterms:modified/issued properties (required in OWL 2 DL)
     g.add((URIRef(DCTERMS.modified), RDF.type, OWL.AnnotationProperty))
-    g.add((URIRef(DCTERMS.issued), RDF.type, OWL.AnnotationProperty))
     g.namespace_manager.bind('stax_ont', None, replace=True)
     g.namespace_manager.bind('schema', SCHEMA, replace=True)
 
