@@ -46,6 +46,10 @@ def main():
     html = re.sub(r'<style>.*</style>', f'<style>{css}</style>', html, flags=re.DOTALL)
     img = f'<img src="/{version_tag}/assets/ontology.png" alt="Ontology diagram" >'
     html = re.sub(r'<div.*?Pictures.*?</div>', img, html)
+
+    # Remove the erroneous download link
+    html = re.sub(r'<dt>Ontology RDF.*?</dd>', '', html, flags=re.DOTALL)
+
     # Save
     with open(output_file, 'w') as f:
         f.write(html)
