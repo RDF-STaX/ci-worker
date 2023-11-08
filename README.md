@@ -9,6 +9,7 @@ Use the provided Docker image. In the container you can invoke the commands:
 ```bash
 $ python /app/tasks/package.py <input dir> <output dir> <version tag>
 $ python /app/tasks/doc_gen.py <input file> <output dir> <version tag>
+$ python /app/tasks/nanopub_fetch.py <cache dir> <output dir> <version tag>
 $ java -jar /app/robot.jar <command>
 ```
 
