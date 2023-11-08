@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 rdflib = "*"
 pylode = "2.13.2"
+nanopub = "2.0.0"
+requests = "*"
 
 [dev-packages]
 
