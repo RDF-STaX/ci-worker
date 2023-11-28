@@ -42,8 +42,33 @@ ul.hlist li {
 
 .entity {
     border: 1px solid var(--md-typeset-kbd-border-color);
-    margin: 5px 0 5px 0;
+    margin: 5px 0;
     padding: 5px;
+}
+
+@media screen and (max-width: 600px) {
+    .entity {
+        margin: 5px -10px;
+    }
+
+    .entity > h3 {
+        margin-bottom: 1em;
+    }
+
+    .entity table th, .entity table td {
+        padding: 0.5em 0.35em !important;
+        min-width: unset !important;
+        width: unset !important;
+    }
+
+    .entity table a {
+        word-break: break-word !important;
+    }
+
+    ul.hlist {
+        margin-left: -10px !important;
+        margin-right: -10px;
+    }
 }
 
 .entity th {

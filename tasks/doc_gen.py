@@ -50,6 +50,9 @@ def main():
     # Remove the erroneous download link
     html = re.sub(r'<dt>Ontology RDF.*?</dd>', '', html, flags=re.DOTALL)
 
+    # Remove H1
+    html = re.sub(r'<h1.*?</h1>', '', html, flags=re.DOTALL)
+
     # Save
     with open(output_file, 'w') as f:
         f.write(html)
