@@ -35,6 +35,9 @@ def main():
     print(f'Checked {len(validation_results)} test files')
     print(f'{sum(validation_results)} valid, {len(validation_results) - sum(validation_results)} invalid')
 
+    if sum(validation_results) != len(validation_results):
+        sys.exit(1)
+
 
 def validate_test(test_file: Path, schema: dict) -> bool:
     with open(test_file, 'r') as f:
@@ -45,6 +48,17 @@ def validate_test(test_file: Path, schema: dict) -> bool:
         validate(test, schema)
     except Exception as e:
         print(f'ERROR: Test file {test_file} is not valid: {e}')
+        return False
+
+    # check if the filename is valid
+    filename = f"cq{test['useCase']}-{test['testNumber']}"
+    if test_file.stem != filename:
+        print(f'ERROR: Test file {test_file} has invalid filename {test_file.stem}, should be {filename}')
+        return False
+
+    # check if the parent folder is named correctly
+    if test_file.parent.stem != f"uc{test['useCase']}":
+        print(f'ERROR: Test file {test_file} is in wrong folder {test_file.parent.stem}, should be uc{test["useCase"]}')
         return False
 
     # check if the query file exists
