@@ -24,10 +24,10 @@ def main():
     validation_results = []
 
     # check all files in direct subdirectories of test_dir
-    for uc_dir in test_dir.iterdir():
+    for uc_dir in sorted(test_dir.iterdir()):
         if not uc_dir.is_dir():
             continue
-        for test_file in uc_dir.iterdir():
+        for test_file in sorted(uc_dir.iterdir()):
             if not test_file.is_file() or test_file.suffix != '.yaml':
                 continue
             validation_results.append(validate_test(test_file, schema))
