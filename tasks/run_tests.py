@@ -7,6 +7,13 @@ import sys
 
 
 def main():
+    if len(sys.argv) != 3:
+        print('Runs the competency question tests\n'
+              'Args:\n'
+              '- in_file: input RDF file\n'
+              '- test_dir: directory containing the test files')
+        sys.exit(1)
+
     in_file = Path(sys.argv[1])
     test_dir = Path(sys.argv[2])
 
@@ -45,10 +52,10 @@ def run_test(test_file: Path, g: Graph) -> bool:
     print(f"  Got {results} result(s)")
 
     success = False
-    if test['expectation'] == 'empty' and results == 0:
-        success = True
-    elif test['expectation'] == 'nonempty' and results > 0:
-        success = True
+    if test['expectation'] == 'empty':
+        success = results == 0
+    elif test['expectation'] == 'nonEmpty':
+        success = results > 0
     elif test['expectation']['resultsCount'] == results:
         success = True
 
