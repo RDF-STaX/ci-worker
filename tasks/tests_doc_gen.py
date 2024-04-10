@@ -6,15 +6,17 @@ import textwrap
 
 
 def main():
-    if len(sys.argv) != 3:
+    if len(sys.argv) != 4:
         print('Generates the docs for competency question tests\n'
               'Args:\n'
               '- test_dir: directory containing the test files\n'
-              '- output_path: the file to write the docs to (will be truncated)')
+              '- output_path: the file to write the docs to (will be truncated)\n'
+              '- ref: branch or tag name')
         sys.exit(1)
 
     test_dir = Path(sys.argv[1])
     output_path = Path(sys.argv[2])
+    ref = sys.argv[3]
 
     out_f = open(output_path, 'wt')
 
@@ -27,7 +29,7 @@ def main():
         for test_file in uc_dir.iterdir():
             if not test_file.is_file() or test_file.suffix != '.yaml':
                 continue
-            write_test(test_file, out_f)
+            write_test(test_file, out_f, ref)
 
     print('Done.')
 
@@ -41,14 +43,14 @@ def write_use_case(uc_dir, out_file):
     out_file.write('\n')
 
 
-def write_test(test_file, out_file):
+def write_test(test_file, out_file, ref):
     with open(test_file, 'r') as f:
         test = yaml.safe_load(f)
 
     with open(test_file.with_suffix('.rq'), 'r') as f:
         query = f.read()
 
-    def_link = f"https://github.com/RDF-STaX/rdf-stax.github.io/blob/main/tests/uc{test['useCase']}/{test_file.name}"
+    def_link = f"https://github.com/RDF-STaX/rdf-stax.github.io/blob/{ref}/tests/uc{test['useCase']}/{test_file.name}"
     out_file.write(f"### Test CQ{test['useCase']}.{test['testNumber']} ([definition]({def_link}))\n\n")
     out_file.write(f"**Question:** {test['text']}\n\n")
     out_file.write(f"**Expectation:** ")
