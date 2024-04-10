@@ -21,12 +21,12 @@ def main():
     out_f = open(output_path, 'wt')
 
     # check all files in direct subdirectories of test_dir
-    for uc_dir in test_dir.iterdir():
+    for uc_dir in sorted(test_dir.iterdir()):
         if not uc_dir.is_dir():
             continue
         write_use_case(uc_dir, out_f)
 
-        for test_file in uc_dir.iterdir():
+        for test_file in sorted(uc_dir.iterdir()):
             if not test_file.is_file() or test_file.suffix != '.yaml':
                 continue
             write_test(test_file, out_f, ref)
