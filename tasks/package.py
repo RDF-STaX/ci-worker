@@ -115,7 +115,7 @@ def main():
             # print(f'Adding inferred property {s} {p} {o}')
             g.add((s, p, o))
         elif p in STAX_INFERRED_PROPS:
-            print(f'Adding inferred property {s} {p} {o}')
+            # print(f'Adding inferred property {s} {p} {o}')
             g.add((s, p, o))
 
     print(f'Added {len(g) - original_size} inferred triples')
