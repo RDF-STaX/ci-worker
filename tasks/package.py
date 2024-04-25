@@ -11,6 +11,13 @@ STAX_PREFIX = 'https://w3id.org/stax/ontology#'
 STAX_MAIN = 'https://w3id.org/stax/ontology'
 STAX = Namespace(STAX_PREFIX)
 SCHEMA = Namespace('http://schema.org/')
+STAX_INFERRED_PROPS = [
+    SKOS.narrower,
+    STAX.canBeFlattenedInto,
+    STAX.canBeGroupedInto,
+    STAX.canBeTriviallyExtendedInto,
+    STAX.hasElementType,
+]
 
 
 def main():
@@ -107,8 +114,8 @@ def main():
         elif p in [RDFS.domain, RDFS.range] and str(s).startswith(STAX_PREFIX):
             # print(f'Adding inferred property {s} {p} {o}')
             g.add((s, p, o))
-        elif p in [SKOS.narrower, STAX.canBeFlattenedInto, STAX.canBeGroupedInto, STAX.hasElementType]:
-            # print(f'Adding inferred property {s} {p} {o}')
+        elif p in STAX_INFERRED_PROPS:
+            print(f'Adding inferred property {s} {p} {o}')
             g.add((s, p, o))
 
     print(f'Added {len(g) - original_size} inferred triples')
