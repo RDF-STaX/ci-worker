@@ -70,12 +70,13 @@ def main():
     d.serialize(Path(output_dir, 'nanopubs.nq'), format='nquads')
 
     print(f'Writing download links...')
+    short_version_tag = version_tag[1:] if version_tag.startswith('v') else version_tag
     with open(Path(output_dir, 'nanopub_links.md'), 'w') as f:
         f.write('!!! info\n\n')
         f.write('    Download the RDF-STaX nanopublication dump in RDF: ')
-        f.write(f'**[TriG]({BASE_LINK}/{version_tag}/nanopubs.trig)**')
+        f.write(f'**[TriG]({BASE_LINK}/{short_version_tag}/nanopubs.trig)**')
         f.write(', ')
-        f.write(f'**[N-Quads]({BASE_LINK}/{version_tag}/nanopubs.nq)**')
+        f.write(f'**[N-Quads]({BASE_LINK}/{short_version_tag}/nanopubs.nq)**')
         f.write('.\n\n')
         f.write(f'    The dump includes {len(source_files)} nanopublications. ')
         f.write(f'Created at: {datetime.now(timezone.utc).isoformat()[:19]} UTC.\n')
