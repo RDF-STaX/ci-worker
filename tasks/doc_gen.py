@@ -2,6 +2,7 @@ from pathlib import Path
 import re
 import sys
 
+from bs4 import BeautifulSoup
 import pylode
 
 FORMATS = [
@@ -53,9 +54,28 @@ def main():
     # Remove H1
     html = re.sub(r'<h1.*?</h1>', '', html, flags=re.DOTALL)
 
+    # Remove the favicon of pyLODE
+    html = re.sub(r'<link rel="icon".+?>', '', html, flags=re.DOTALL)
+
+    # Fix anchor links to match entity names in the ontology
+    # Issue: https://github.com/RDF-STaX/rdf-stax.github.io/issues/55
+    soup = BeautifulSoup(html, 'html.parser')
+    for div_tag in soup.find_all('div', class_='entity'):
+        code_tags = div_tag.find_all('code')
+        if len(code_tags) == 0:
+            continue
+        uri = code_tags[0].text.strip()
+        if not uri.startswith('https://w3id.org/stax/ontology#'):
+            continue
+        name = uri.split('#')[1]
+        old_id = div_tag['id']
+        div_tag['id'] = name
+        for anchor_link in soup.find_all('a', href='#' + old_id):
+            anchor_link['href'] = '#' + name
+
     # Save
     with open(output_file, 'w') as f:
-        f.write(html)
+        f.write(soup.prettify())
 
     print('Writing download links...')
     with open(output_dir / 'links.md', 'w') as f:
