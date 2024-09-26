@@ -4,13 +4,16 @@ CI worker for processing the RDF Stream Taxonomy (RDF-STaX).
 
 ## Usage
 
-Use the provided Docker image. In the container you can invoke the commands:
+Use the provided Docker image. The container includes the Python scripts, a JRE, the [ROBOT tool](http://robot.obolibrary.org/), and an [Apache Jena CLI distribution](https://jena.apache.org/documentation/tools/index.html) with the [Jelly-JVM plugin](https://w3id.org/jelly/jelly-jvm/dev/getting-started-plugins/) installed.
+
+In the container you can invoke the commands:
 
 ```bash
 $ python /app/tasks/package.py <input dir> <output dir> <version tag>
 $ python /app/tasks/doc_gen.py <input file> <output dir> <version tag>
 $ python /app/tasks/nanopub_fetch.py <cache dir> <output dir> <version tag>
 $ java -jar /app/robot.jar <command>
+$ /app/jena/bin/<jena command> <args ...>
 ```
 
 ## Contributing
