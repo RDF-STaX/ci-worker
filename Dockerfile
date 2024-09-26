@@ -1,4 +1,4 @@
-FROM python:3.11 as base
+FROM python:3.11 AS base
 
 # Derived from (Apache License 2.0): 
 # https://github.com/OpenCS-ontology/ci-worker/blob/496b15d734ac77ad51ec28fed831a4bb82c2bc90/Dockerfile
