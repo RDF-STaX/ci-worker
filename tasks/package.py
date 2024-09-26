@@ -137,6 +137,11 @@ def serialize(g: Graph, output_dir: Path, filename: str):
     g.serialize(destination=output_dir / f'{filename}.rdf', format='xml', encoding='utf-8')
     g.serialize(destination=output_dir / f'{filename}.jsonld', format='json-ld', encoding='utf-8')
     g.serialize(destination=output_dir / f'{filename}.nt', format='nt', encoding='utf-8')
+    # Convert it to Jelly as well, using Apache Jena RIOT
+    with open(output_dir / f'{filename}.jelly', 'wb') as f:
+        subprocess.run([
+            'jena/bin/riot', '--stream=jelly', str(output_dir / f'{filename}.nt')
+        ], check=True, stdout=f, stderr=subprocess.STDOUT)
 
 
 if __name__ == '__main__':

@@ -10,6 +10,7 @@ FORMATS = [
     ('nt', 'N-Triples'),
     ('jsonld', 'JSON-LD'),
     ('rdf', 'RDF/XML'),
+    ('jelly', 'Jelly'),
 ]
 BASE_LINK = 'https://w3id.org/stax'
 
