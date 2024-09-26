@@ -91,7 +91,7 @@ def main():
         os.mkdir(output_dir)
     except FileExistsError:
         pass
-    serialize(g, output_dir, 'dl')
+    serialize(g, output_dir, 'dl', parent_dir)
 
     print("Validating the OWL 2 DL ontology's profile...")
     # We have changed the ontology, so let's revalidate it, just in case
@@ -129,10 +129,10 @@ def main():
     print(f'Added {len(g) - original_size} triples about alignments')
 
     print('Serializing the merged ontology...')
-    serialize(g, output_dir, 'stax')
+    serialize(g, output_dir, 'stax', parent_dir)
 
 
-def serialize(g: Graph, output_dir: Path, filename: str):
+def serialize(g: Graph, output_dir: Path, filename: str, parent_dir: Path):
     g.serialize(destination=output_dir / f'{filename}.ttl', format='turtle', encoding='utf-8')
     g.serialize(destination=output_dir / f'{filename}.rdf', format='xml', encoding='utf-8')
     g.serialize(destination=output_dir / f'{filename}.jsonld', format='json-ld', encoding='utf-8')
@@ -140,7 +140,7 @@ def serialize(g: Graph, output_dir: Path, filename: str):
     # Convert it to Jelly as well, using Apache Jena RIOT
     with open(output_dir / f'{filename}.jelly', 'wb') as f:
         subprocess.run([
-            'jena/bin/riot', '--stream=jelly', str(output_dir / f'{filename}.nt')
+            str(parent_dir / 'jena/bin/riot'), '--stream=jelly', str(output_dir / f'{filename}.nt')
         ], check=True, stdout=f, stderr=subprocess.STDOUT)
 
 

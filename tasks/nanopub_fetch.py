@@ -21,6 +21,7 @@ def main():
               '- version tag for the ontology\n')
         exit(1)
 
+    parent_dir = Path(__file__).parent.parent
     cache_dir = sys.argv[1]
     output_dir = sys.argv[2]
     version_tag = sys.argv[3]
@@ -72,7 +73,7 @@ def main():
     # Convert it to Jelly as well, using Apache Jena RIOT
     with open(Path(output_dir, 'nanopubs.jelly'), 'wb') as f:
         subprocess.run([
-            'jena/bin/riot', '--stream=jelly', str(Path(output_dir, 'nanopubs.nq'))
+            str(parent_dir / 'jena/bin/riot'), '--stream=jelly', str(Path(output_dir, 'nanopubs.nq'))
         ], check=True, stdout=f, stderr=subprocess.STDOUT)
 
     print(f'Writing download links...')
