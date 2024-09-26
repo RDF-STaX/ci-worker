@@ -84,9 +84,9 @@ def main():
         f.write('    Download the ontology in RDF: ')
         for (ext, fmt) in FORMATS:
             f.write(f'**[{fmt}]({BASE_LINK}/{version_tag}/ontology.{ext})**')
-            if ext != 'rdf':
+            if ext != FORMATS[-1][0]:
                 f.write(', ')
-        f.write('.\n')
+        f.write('.<br>*[:material-help-circle: What is Jelly?](https://w3id.org/jelly)*\n')
 
 
 if __name__ == '__main__':

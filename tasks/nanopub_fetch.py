@@ -86,7 +86,7 @@ def main():
         f.write(f'**[N-Quads]({BASE_LINK}/{short_version_tag}/nanopubs.nq)**')
         f.write(', ')
         f.write(f'**[Jelly]({BASE_LINK}/{short_version_tag}/nanopubs.jelly)**')
-        f.write('.\n\n')
+        f.write('.<br>*[:material-help-circle: What is Jelly?](https://w3id.org/jelly)*\n\n')
         f.write(f'    The dump includes {len(source_files)} nanopublications. ')
         f.write(f'Created at: {datetime.now(timezone.utc).isoformat()[:19]} UTC.\n')
 
