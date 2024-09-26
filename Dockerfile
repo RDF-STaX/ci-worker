@@ -1,13 +1,13 @@
-FROM python:3.11 as base
+FROM python:3.11 AS base
 
 # Derived from (Apache License 2.0): 
 # https://github.com/OpenCS-ontology/ci-worker/blob/496b15d734ac77ad51ec28fed831a4bb82c2bc90/Dockerfile
 
 # Setup env
-ENV LANG C.UTF-8
-ENV LC_ALL C.UTF-8
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONFAULTHANDLER 1
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONFAULTHANDLER=1
 
 
 FROM base AS python-deps
@@ -36,7 +36,18 @@ RUN apt-get update && \
 WORKDIR /app
 
 # Download robot.jar
-RUN wget https://github.com/ontodev/robot/releases/download/v1.9.5/robot.jar
+RUN wget https://github.com/ontodev/robot/releases/download/v1.9.6/robot.jar
+
+# Download Apache Jena
+# The path to Jena RIOT CLI tool is /app/jena/bin/riot
+RUN wget https://dlcdn.apache.org/jena/binaries/apache-jena-5.1.0.tar.gz -O apache-jena.tar.gz && \
+    tar -xzf apache-jena.tar.gz && \
+    rm apache-jena.tar.gz && \
+    mv apache-jena-* jena
+
+# Download the Jelly-JVM plugin for Jena
+RUN wget https://github.com/Jelly-RDF/jelly-jvm/releases/download/v2.0.2/jelly-jena-plugin.jar \
+    -O jena/lib/jelly-jena-plugin.jar
 
 # Copy virtual env from python-deps stage
 COPY --from=python-deps /.venv /app/.venv

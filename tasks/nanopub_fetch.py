@@ -1,6 +1,7 @@
 from datetime import datetime, timezone
 import hashlib
 from pathlib import Path
+import subprocess
 import sys
 
 from rdflib import Dataset
@@ -68,6 +69,11 @@ def main():
         d.parse(Path(cache_dir, source_file), format='trig')
     d.serialize(Path(output_dir, 'nanopubs.trig'), format='trig')
     d.serialize(Path(output_dir, 'nanopubs.nq'), format='nquads')
+    # Convert it to Jelly as well, using Apache Jena RIOT
+    with open(Path(output_dir, 'nanopubs.jelly'), 'wb') as f:
+        subprocess.run([
+            'jena/bin/riot', '--stream=jelly', str(Path(output_dir, 'nanopubs.nq'))
+        ], check=True, stdout=f, stderr=subprocess.STDOUT)
 
     print(f'Writing download links...')
     short_version_tag = version_tag[1:] if version_tag.startswith('v') else version_tag
@@ -77,6 +83,8 @@ def main():
         f.write(f'**[TriG]({BASE_LINK}/{short_version_tag}/nanopubs.trig)**')
         f.write(', ')
         f.write(f'**[N-Quads]({BASE_LINK}/{short_version_tag}/nanopubs.nq)**')
+        f.write(', ')
+        f.write(f'**[Jelly]({BASE_LINK}/{short_version_tag}/nanopubs.jelly)**')
         f.write('.\n\n')
         f.write(f'    The dump includes {len(source_files)} nanopublications. ')
         f.write(f'Created at: {datetime.now(timezone.utc).isoformat()[:19]} UTC.\n')
