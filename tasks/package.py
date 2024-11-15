@@ -140,7 +140,11 @@ def serialize(g: Graph, output_dir: Path, filename: str, parent_dir: Path):
     # Convert it to Jelly as well, using Apache Jena RIOT
     with open(output_dir / f'{filename}.jelly', 'wb') as f:
         subprocess.run([
-            str(parent_dir / 'jena/bin/riot'), '--stream=jelly', str(output_dir / f'{filename}.nt')
+            str(parent_dir / 'jena/bin/riot'),
+            '--stream=jelly',
+            # Disable generalized RDF and RDF-star in the metadata, because we are not using that
+            '--set="https://ostrzyciel.eu/jelly/riot/symbols#preset=SMALL_STRICT"',
+            str(output_dir / f'{filename}.nt')
         ], check=True, stdout=f, stderr=subprocess.STDOUT)
 
 
