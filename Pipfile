@@ -6,12 +6,12 @@ name = "pypi"
 [packages]
 jsonschema = "4.21.1"
 pyyaml = "6.0.1"
-rdflib = "7.1.4"
+rdflib = "*"
 pylode = "2.13.2"
 nanopub = "2.0.0"
 requests = "*"
 beautifulsoup4 = "*"
-pyjelly = "0.5.2"
+pyjelly = "*"
 
 [dev-packages]
 
