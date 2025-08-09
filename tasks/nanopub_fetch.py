@@ -70,7 +70,11 @@ def main():
         d.parse(Path(cache_dir, source_file), format='trig')
     d.serialize(Path(output_dir, 'nanopubs.trig'), format='trig')
     d.serialize(Path(output_dir, 'nanopubs.nq'), format='nquads')
-    d.serialize(Path(output_dir, 'nanopubs.jelly'), format='jelly')
+    # Convert it to Jelly as well, using jelly-cli
+    with open(Path(output_dir, 'nanopubs.jelly'), 'wb') as f:
+        subprocess.run([
+            'jelly-cli', 'rdf', 'to-jelly', str(Path(output_dir, 'nanopubs.nq'))
+        ], check=True, stdout=f, stderr=subprocess.STDOUT)
 
     print(f'Writing download links...')
     short_version_tag = version_tag[1:] if version_tag.startswith('v') else version_tag
