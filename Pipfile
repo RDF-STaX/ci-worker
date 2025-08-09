@@ -11,6 +11,7 @@ pylode = "2.13.2"
 nanopub = "2.0.0"
 requests = "*"
 beautifulsoup4 = "*"
+pyjelly = "*"
 
 [dev-packages]
 

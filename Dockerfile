@@ -38,9 +38,6 @@ WORKDIR /app
 # Download robot.jar
 RUN wget https://github.com/ontodev/robot/releases/download/v1.9.7/robot.jar
 
-# Install jelly-cli
-RUN bash -c "$(curl -sSfL https://w3id.org/jelly/setup-cli.sh)"
-
 # Copy virtual env from python-deps stage
 COPY --from=python-deps /.venv /app/.venv
 ENV PATH="/app/.venv/bin:$PATH"
