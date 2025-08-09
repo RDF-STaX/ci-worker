@@ -4,7 +4,7 @@ CI worker for processing the RDF Stream Taxonomy (RDF-STaX).
 
 ## Usage
 
-Use the provided Docker image. The container includes the Python scripts, a JRE, the [ROBOT tool](http://robot.obolibrary.org/), and an [Apache Jena CLI distribution](https://jena.apache.org/documentation/tools/index.html) with the [Jelly-JVM plugin](https://w3id.org/jelly/jelly-jvm/dev/getting-started-plugins/) installed.
+Use the provided Docker image. The container includes the Python scripts, a JRE, the [ROBOT tool](http://robot.obolibrary.org/), and [jelly-cli](https://github.com/Jelly-RDF/cli) for converting between various RDF formats, including [Jelly](https://w3id.org/jelly).
 
 In the container you can invoke the commands:
 

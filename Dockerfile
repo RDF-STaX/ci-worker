@@ -38,16 +38,8 @@ WORKDIR /app
 # Download robot.jar
 RUN wget https://github.com/ontodev/robot/releases/download/v1.9.7/robot.jar
 
-# Download Apache Jena
-# The path to Jena RIOT CLI tool is /app/jena/bin/riot
-RUN wget https://dlcdn.apache.org/jena/binaries/apache-jena-5.2.0.tar.gz -O apache-jena.tar.gz && \
-    tar -xzf apache-jena.tar.gz && \
-    rm apache-jena.tar.gz && \
-    mv apache-jena-* jena
-
-# Download the Jelly-JVM plugin for Jena
-RUN wget https://github.com/Jelly-RDF/jelly-jvm/releases/download/v2.3.0/jelly-jena-plugin.jar \
-    -O jena/lib/jelly-jena-plugin.jar
+# Install jelly-cli
+RUN bash -c "$(curl -sSfL https://w3id.org/jelly/setup-cli.sh)"
 
 # Copy virtual env from python-deps stage
 COPY --from=python-deps /.venv /app/.venv

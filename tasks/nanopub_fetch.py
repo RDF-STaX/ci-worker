@@ -70,10 +70,10 @@ def main():
         d.parse(Path(cache_dir, source_file), format='trig')
     d.serialize(Path(output_dir, 'nanopubs.trig'), format='trig')
     d.serialize(Path(output_dir, 'nanopubs.nq'), format='nquads')
-    # Convert it to Jelly as well, using Apache Jena RIOT
+    # Convert it to Jelly as well, using jelly-cli
     with open(Path(output_dir, 'nanopubs.jelly'), 'wb') as f:
         subprocess.run([
-            str(parent_dir / 'jena/bin/riot'), '--stream=jelly', str(Path(output_dir, 'nanopubs.nq'))
+            'jelly-cli', 'rdf', 'to-jelly', str(Path(output_dir, 'nanopubs.nq'))
         ], check=True, stdout=f, stderr=subprocess.STDOUT)
 
     print(f'Writing download links...')
