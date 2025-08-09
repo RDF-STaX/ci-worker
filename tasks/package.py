@@ -140,7 +140,7 @@ def serialize(g: Graph, output_dir: Path, filename: str, parent_dir: Path):
     # Convert it to Jelly as well, using jelly-cli
     with open(output_dir / f'{filename}.jelly', 'wb') as f:
         subprocess.run([
-            'jelly-cli', 'rdf', 'to-jelly',
+            '/root/.local/bin/jelly-cli', 'rdf', 'to-jelly',
             # Disable generalized RDF and RDF-star in the metadata, because we are not using that
             '--opt.rdf-star=false',
             '--opt.generalized-statements=false',

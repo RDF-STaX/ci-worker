@@ -73,7 +73,7 @@ def main():
     # Convert it to Jelly as well, using jelly-cli
     with open(Path(output_dir, 'nanopubs.jelly'), 'wb') as f:
         subprocess.run([
-            'jelly-cli', 'rdf', 'to-jelly', str(Path(output_dir, 'nanopubs.nq'))
+            '/root/.local/bin/jelly-cli', 'rdf', 'to-jelly', str(Path(output_dir, 'nanopubs.nq'))
         ], check=True, stdout=f, stderr=subprocess.STDOUT)
 
     print(f'Writing download links...')
